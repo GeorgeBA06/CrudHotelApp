@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-hotels
+      author: George
+      changes:
+        - createTable:
+            tableName: hotels
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_hotels
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: clob
+              - column:
+                  name: brand
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+        - createIndex:
+            tableName: hotels
+            indexName: idx_hotels_name
+            columns:
+              - column:
+                  name: name
+
+        - createIndex:
+            tableName: hotels
+            indexName: idx_hotels_brand
+            columns:
+              - column:
+                  name: brand

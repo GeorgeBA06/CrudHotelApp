@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-create-amenities
+      author: George
+      changes:
+        - createTable:
+            tableName: amenities
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_amenities
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+        - addUniqueConstraint:
+            tableName: amenities
+            columnNames: name
+            constraintName: uk_amenities_name
+
+        - createIndex:
+            tableName: amenities
+            indexName: idx_amenities_name
+            columns:
+              - column:
+                  name: name

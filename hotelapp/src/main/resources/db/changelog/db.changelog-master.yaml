@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changes/001-create-hotels.yaml
+  - include:
+      file: db/changelog/changes/002-create-hotel-addresses.yaml
+  - include:
+      file: db/changelog/changes/003-create-hotel-contacts.yaml
+  - include:
+      file: db/changelog/changes/004-create-hotel-arrival-times.yaml
+  - include:
+      file: db/changelog/changes/005-create-amenities.yaml
+  - include:
+      file: db/changelog/changes/006-create-hotel-amenities.yaml

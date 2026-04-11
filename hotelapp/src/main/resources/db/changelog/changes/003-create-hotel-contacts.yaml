@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-hotel-contacts
+      author: George
+      changes:
+        - createTable:
+            tableName: hotel_contacts
+            columns:
+              - column:
+                  name: hotel_id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_hotel_contacts
+                    nullable: false
+              - column:
+                  name: phone
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: hotel_contacts
+            baseColumnNames: hotel_id
+            referencedTableName: hotels
+            referencedColumnNames: id
+            constraintName: fk_hotel_contacts_hotel
+            onDelete: CASCADE
+
+        - createIndex:
+            tableName: hotel_contacts
+            indexName: idx_hotel_contacts_email
+            columns:
+              - column:
+                  name: email
