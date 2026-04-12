@@ -22,6 +22,7 @@ public class HotelController {
     private final HotelQueryService hotelQueryService;
     private final HotelCommandService hotelCommandService;
 
+
     @Operation(summary = "Get all hotels (short view)")
     @GetMapping
     public List<HotelShortResponseDto> getAllHotels(){
@@ -38,5 +39,14 @@ public class HotelController {
     @PostMapping
     public HotelShortResponseDto createHotel(@Valid @RequestBody CreateHotelRequestDto dto){
         return hotelCommandService.createHotel(dto);
+    }
+
+    @Operation(summary = "Add amenities to hotel")
+    @PostMapping("/{id}/amenities")
+    public HotelDetailsResponseDto addAmenities(
+            @PathVariable Long id,
+            @RequestBody List<String> amenities
+    ) {
+        return hotelCommandService.addAmenities(id, amenities);
     }
 }
