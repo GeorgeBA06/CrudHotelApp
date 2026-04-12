@@ -53,4 +53,14 @@ public class GlobalExceptionHandler {
         problemDetail.setProperty("errors", errors);
         return problemDetail;
     }
+
+    @ExceptionHandler(InvalidHistogramParameterException.class)
+    public ProblemDetail handleInvalidHistogramParameterException(InvalidHistogramParameterException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+                HttpStatus.BAD_REQUEST,
+                ex.getMessage()
+        );
+        problemDetail.setTitle("Invalid histogram parameter");
+        return problemDetail;
+    }
 }

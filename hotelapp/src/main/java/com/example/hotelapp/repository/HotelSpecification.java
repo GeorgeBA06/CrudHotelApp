@@ -64,9 +64,18 @@ public final class HotelSpecification {
             List<String> normalizedAmenities = normalizeAmenities(criteria.amenities());
             if (!normalizedAmenities.isEmpty()) {
                 Join<HotelEntity, AmenityEntity> amenityJoin = root.join("amenities", JoinType.LEFT);
-                predicates.add(
-                        cb.lower(amenityJoin.get("name")).in(normalizedAmenities)
-                );
+                List<Predicate> amenityPredicates = new ArrayList<>();
+
+                for (String amenity : normalizedAmenities) {
+                    amenityPredicates.add(
+                            cb.like(
+                                    cb.lower(amenityJoin.get("name")),
+                                    "%" + amenity + "%"
+                            )
+                    );
+                }
+
+                predicates.add(cb.or(amenityPredicates.toArray(new Predicate[0])));
             }
 
             return cb.and(predicates.toArray(new Predicate[0]));
