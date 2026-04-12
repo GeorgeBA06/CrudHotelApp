@@ -44,9 +44,9 @@ public class HotelMapper {
 
     public HotelEntity toHotelEntity(CreateHotelRequestDto requestDto){
         HotelEntity hotelEntity = new HotelEntity();
-        hotelEntity.setName(hotelEntity.getName());
-        hotelEntity.setDescription(hotelEntity.getDescription());
-        hotelEntity.setBrand(hotelEntity.getBrand());
+        hotelEntity.setName(requestDto.name());
+        hotelEntity.setDescription(requestDto.description());
+        hotelEntity.setBrand(requestDto.brand());
         hotelEntity.setAddress(toAddressEntity(requestDto.addressRequestDto()));
         hotelEntity.setContacts(toContactsEntity(requestDto.contactsRequestDto()));
         hotelEntity.setArrivalTime(toArrivalTimeEntity(requestDto.arrivalTimeRequestDto()));
